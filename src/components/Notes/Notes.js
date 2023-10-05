@@ -2,7 +2,6 @@ import "./Notes.css"
 import Note from "./Note"
 
 const Notes = (props) => {
-    console.log("props", props.notes[0])
     const { notes } = props
     return (
         <div className="notes">

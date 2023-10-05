@@ -5,32 +5,48 @@ const Form = () => {
         // const formClickHandler = (event) => {
         //     console.log("Form clicked!!!", event)
         // }
-        const [userInput, setUserInput] = useState({
-            title: "",
-            text: ""
-        })
+        // const [userInput, setUserInput] = useState({
+        //     title: "",
+        //     text: ""
+        // })
         
-        // const [title, setTitle] = useState("")
-        // const [text, setText] = useState("")
+        const [title, setTitle] = useState("")
+        const [text, setText] = useState("")
 
-        const titleChangeHandler = (event) => setUserInput({
-            ...userInput,
-            title: event.target.value
-        })
+        const titleChangeHandler = (event) => setTitle(event.target.value)
+        const textChangeHandler = (event) => setText(event.target.value)
 
-        const textChangeHandler = (event) => setUserInput({
-            ...userInput,
-            text: event.target.value
-        })
+        // const titleChangeHandler = (event) => setUserInput((prevState) => {
+        //    return {
+        //     ...prevState,
+        //     title: event.target.value
+        //    }
+        // })
+
+        // const textChangeHandler = (event) => setUserInput((prevState) => {
+        //     return {
+        //         ...prevState,
+        //         text: event.target.value
+        //     }
+        // })
         
 
         const submitFormHandler = (event) => {
             event.preventDefault()
             //add array logic here
-            setUserInput({
-                title: "",
-                text: ""
-            })
+            // setUserInput({
+            //     title: "",
+            //     text: ""
+            // })
+            const note = {
+                id: "",
+                title,
+                text
+            }
+            console.log(note)
+
+            setTitle("")
+            setText("")
         }
     
     return (
@@ -65,10 +81,8 @@ const Form = () => {
 
         <div className="form-container active-form">
             <form onSubmit={submitFormHandler} className="form" id="form">
-                <h1>TITLE: {userInput.title}</h1>
-                <h1>TEXT: {userInput.text}</h1>
-                <input onChange={titleChangeHandler} value={userInput.title} className="note-title" type="text" placeholder="Title" />
-                <input onChange={textChangeHandler} value={userInput.text} className="note-text" type="text" placeholder="Take a note..." />
+                <input onChange={titleChangeHandler} value={title} className="note-title" type="text" placeholder="Title" />
+                <input onChange={textChangeHandler} value={text} className="note-text" type="text" placeholder="Take a note..." />
                 <div className="form-actions">
                     <div className="icons">
                         <div className="tooltip">
