@@ -1,13 +1,13 @@
 import React, { useState } from "react"
 
 const Note = (props) => {
-    useState(props.title)
+    console.log(useState(props.title))
     
     const [title, setTitle] = useState(props.title)
 
     const noteClickHandler = () => {
         setTitle("changed Title")
-        `Title: ${title}`
+        console.log(`Title: ${title}`)
     }
     return (
          <div className="note" 

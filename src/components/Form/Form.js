@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import "./Form.css"
 
-const Form = () => {
+const Form = (props) => {
         // const formClickHandler = (event) => {
         //     console.log("Form clicked!!!", event)
         // }
@@ -9,7 +9,6 @@ const Form = () => {
         //     title: "",
         //     text: ""
         // })
-        
         const [title, setTitle] = useState("")
         const [text, setText] = useState("")
 
@@ -44,7 +43,7 @@ const Form = () => {
                 text
             }
             console.log(note)
-
+            props.addNote(note)
             setTitle("")
             setText("")
         }
