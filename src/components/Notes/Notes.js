@@ -7,13 +7,22 @@ const Notes = (props) => {
   return (
     <div className="notes">
         {/* Conditional outputting */}
-      {notes.length === 0 ? (
+        {
+            notes.length === 0 && <p>Notes you add appear here.</p>
+        }
+        {
+            notes.length !== 0 && notes.map((note, index) => (
+                <Note key={index} id={note.id} title={note.title} text={note.text} />
+            ))
+        }
+
+      {/* {notes.length === 0 ? (
         <p>Notes you add appear here.</p>
       ) : (
         notes.map((note, index) => (
           <Note key={index} id={note.id} title={note.title} text={note.text} />
         ))
-      )}
+      )} */}
     </div>
   );
 };
