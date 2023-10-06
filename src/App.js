@@ -6,16 +6,16 @@ import Notes from "./components/Notes/Notes";
 import Modal from "./components/Modal/Modal";
 
 const NOTES = [
-  {
-    id: "123",
-    title: "some title1",
-    text: "some text1"
-  },
-  {
-    id: "1234",
-    title: "some title2",
-    text: "some text2"
-  }
+  // {
+  //   id: "123",
+  //   title: "some title1",
+  //   text: "some text1"
+  // },
+  // {
+  //   id: "1234",
+  //   title: "some title2",
+  //   text: "some text2"
+  // }
 ]
 
 function App() {
@@ -25,10 +25,7 @@ function App() {
   
   const addNote = (note) => {
     setNotes((prevNotes) => {
-      return [
-        ...notes, 
-        note
-      ]
+      return [...notes, note]
     })
     console.log("notes", notes)
   }
