@@ -1,7 +1,6 @@
 import React, { useState } from "react"
 
 const Note = (props) => {
-    console.log(useState(props.title))
     
     const [title, setTitle] = useState(props.title)
 

@@ -27,7 +27,6 @@ function App() {
     setNotes((prevNotes) => {
       return [...notes, note]
     })
-    console.log("notes", notes)
   }
 
   return (

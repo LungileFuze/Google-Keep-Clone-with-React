@@ -25,41 +25,14 @@ const Form = (props) => {
 
   const formClickHandler = () => {
     console.log("Form clicked!!!");
-    setIsActiveForm(true)
+    setIsActiveForm(true);
   };
 
   return (
     <div>
-      {!isActiveForm ? (
-        <div
-          className="form-container inactive-form"
-          onClick={formClickHandler}
-        >
-          <form action="">
-            <input
-              className="note-text"
-              type="text"
-              placeholder="Take a note..."
-            />
-            <div className="form-actions">
-              <div className="tooltip">
-                <i className="material-icons-outlined hover">check_box</i>
-                <span className="tooltip-text">New list</span>
-              </div>
-              <div className="tooltip">
-                <i className="material-icons-outlined hover">brush</i>
-                <span className="tooltip-text">New note with drawing</span>
-              </div>
-              <div className="tooltip">
-                <i className="material-icons-outlined hover">image</i>
-                <span className="tooltip-text">New note with image</span>
-              </div>
-            </div>
-          </form>
-        </div>
-      ) : (
-        <div className="form-container active-form">
-          <form onSubmit={submitFormHandler} className="form" id="form">
+      <div className="form-container active-form" onClick={formClickHandler}>
+        <form onSubmit={submitFormHandler} className={isActiveForm ? "form" : ""} id="form">
+          {isActiveForm && (
             <input
               onChange={titleChangeHandler}
               value={title}
@@ -67,13 +40,16 @@ const Form = (props) => {
               type="text"
               placeholder="Title"
             />
-            <input
-              onChange={textChangeHandler}
-              value={text}
-              className="note-text"
-              type="text"
-              placeholder="Take a note..."
-            />
+          )}
+
+          <input
+            onChange={textChangeHandler}
+            value={text}
+            className="note-text"
+            type="text"
+            placeholder="Take a note..."
+          />
+          {isActiveForm ? (
             <div className="form-actions">
               <div className="icons">
                 <div className="tooltip">
@@ -125,13 +101,57 @@ const Form = (props) => {
                   <span className="tooltip-text">Redo</span>
                 </div>
               </div>
-              <button className="close-btn">Close</button>
+              <button type="close" className="close-btn">Close</button>
             </div>
-          </form>
-        </div>
-      )}
+            ) : (
+            <div className="form-actions">
+              <div className="tooltip">
+                <i className="material-icons-outlined hover">check_box</i>
+                <span className="tooltip-text">New list</span>
+              </div>
+              <div className="tooltip">
+                <i className="material-icons-outlined hover">brush</i>
+                <span className="tooltip-text">New note with drawing</span>
+              </div>
+              <div className="tooltip">
+                <i className="material-icons-outlined hover">image</i>
+                <span className="tooltip-text">New note with image</span>
+              </div>
+            </div>
+          )}
+        </form>
+      </div>
     </div>
   );
 };
 
 export default Form;
+
+
+  /* <div
+className="form-container inactive-form"
+onClick={formClickHandler}
+>
+<form action="">
+  <input
+    className="note-text"
+    type="text"
+    placeholder="Take a note..."
+  />
+  <div className="form-actions">
+    <div className="tooltip">
+      <i className="material-icons-outlined hover">check_box</i>
+      <span className="tooltip-text">New list</span>
+    </div>
+    <div className="tooltip">
+      <i className="material-icons-outlined hover">brush</i>
+      <span className="tooltip-text">New note with drawing</span>
+    </div>
+    <div className="tooltip">
+      <i className="material-icons-outlined hover">image</i>
+      <span className="tooltip-text">New note with image</span>
+    </div>
+  </div>
+</form>
+</div> */
+
