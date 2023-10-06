@@ -2,41 +2,19 @@ import React, { useState } from "react"
 import "./Form.css"
 
 const Form = (props) => {
-        // const formClickHandler = (event) => {
-        //     console.log("Form clicked!!!", event)
-        // }
-        // const [userInput, setUserInput] = useState({
-        //     title: "",
-        //     text: ""
-        // })
+        const formClickHandler = () => {
+            alert("Form clicked!!!")
+        }
+   
         const [title, setTitle] = useState("")
         const [text, setText] = useState("")
 
         const titleChangeHandler = (event) => setTitle(event.target.value)
         const textChangeHandler = (event) => setText(event.target.value)
 
-        // const titleChangeHandler = (event) => setUserInput((prevState) => {
-        //    return {
-        //     ...prevState,
-        //     title: event.target.value
-        //    }
-        // })
-
-        // const textChangeHandler = (event) => setUserInput((prevState) => {
-        //     return {
-        //         ...prevState,
-        //         text: event.target.value
-        //     }
-        // })
-        
-
         const submitFormHandler = (event) => {
             event.preventDefault()
-            //add array logic here
-            // setUserInput({
-            //     title: "",
-            //     text: ""
-            // })
+           
             const note = {
                 id: "",
                 title,
@@ -50,9 +28,7 @@ const Form = (props) => {
     
     return (
         <div>
-            {/* <h1>Title: { title }</h1>
-            <h1>Text: { text }</h1> */}
-            {/* <div className="form-container" onClick={formClickHandler}>
+            <div className="form-container inactive-form" onClick={formClickHandler}>
             <form action="">
                 <input className="note-text" type="text" placeholder="Take a note..." />
                 <div className="form-actions">
@@ -76,7 +52,7 @@ const Form = (props) => {
                     </div>
                 </div>
             </form>
-        </div> */}
+        </div>
 
         <div className="form-container active-form">
             <form onSubmit={submitFormHandler} className="form" id="form">
