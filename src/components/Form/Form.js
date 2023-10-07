@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./Form.css";
+import { uid } from 'uid';
 
 const Form = (props) => {
   const [title, setTitle] = useState("");
@@ -7,24 +8,26 @@ const Form = (props) => {
   const [isActiveForm, setIsActiveForm] = useState(false);
 
   const titleChangeHandler = (event) => setTitle(event.target.value);
-  const textChangeHandler = (event) => setText(event.target.value);
+  const textChangeHandler = (event) => {
+    setText(event.target.value)
+    setIsActiveForm(true)
+};
 
   const submitFormHandler = (event) => {
     event.preventDefault();
-
     const note = {
-      id: "",
+      id: uid(),
       title,
       text,
     };
-    console.log(note);
+    console.log(note)
     props.addNote(note);
     setTitle("");
     setText("");
+    setIsActiveForm(false)
   };
 
   const formClickHandler = () => {
-    console.log("Form clicked!!!");
     setIsActiveForm(true);
   };
 

@@ -4,11 +4,13 @@ const Note = (props) => {
   const [title, setTitle] = useState(props.title);
   const [text, setText] = useState(props.text);
   const [isHover, setIsHover] = useState(false);
+  
+  // const noteClickHandler = () => {
+  //   setTitle("changed Title");
+  //   setText("change Text");
+  // };
 
-  const noteClickHandler = () => {
-    setTitle("changed Title");
-    setText("change Text");
-  };
+  const archiveNoteHandler = () => props.deleteNote(props.id)
 
   const hoverOverHandler = () => {
     setIsHover(true)
@@ -23,8 +25,8 @@ const Note = (props) => {
   return (
     <div
       className="note"
-      id="note.id"
-      onClick={noteClickHandler}
+      id={props.id}
+      // onClick={noteClickHandler}
       onMouseOver={hoverOverHandler}
       onMouseOut={hoverOutHandler}
     >
@@ -58,7 +60,7 @@ const Note = (props) => {
             <i className="material-icons-outlined hover small-icon">image</i>
             <span className="tooltip-text">Background image</span>
           </div>
-          <div className="tooltip">
+          <div className="tooltip" onClick={archiveNoteHandler}>
             <i className="material-icons-outlined hover small-icon">archive</i>
             <span className="tooltip-text">Archives</span>
           </div>

@@ -25,16 +25,26 @@ function App() {
   
   const addNote = (note) => {
     setNotes((prevNotes) => {
-      return [...notes, note]
+      return [...prevNotes, note]
     })
   }
+
+  const deleteNote = (id) => {
+    setNotes((prevNotes) => {
+      return prevNotes.filter((note) =>id !== note.id)
+    })
+ }
+
+//  function handleDeleteTask(taskId) {
+//   setTasks(tasks.filter((t) => t.id !== taskId));
+// }
 
   return (
     <div>
        <Navbar/>
        <Sidebar/>
-       <Form addNote={addNote}/>
-       <Notes notes={notes}/>
+       <Form addNote={addNote} />
+       <Notes notes={notes} deleteNote={deleteNote}/>
        <Modal/>
     </div>
   );
