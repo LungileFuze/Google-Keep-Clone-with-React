@@ -1,51 +1,49 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import Navbar from "./components/Navbar/Navbar";
-import Sidebar from "./components/Sidebar/Sidebar"
+import Sidebar from "./components/Sidebar/Sidebar";
 import Form from "./components/Form/Form";
 import Notes from "./components/Notes/Notes";
 import Modal from "./components/Modal/Modal";
 
-const NOTES = [
-  // {
-  //   id: "123",
-  //   title: "some title1",
-  //   text: "some text1"
-  // },
-  // {
-  //   id: "1234",
-  //   title: "some title2",
-  //   text: "some text2"
-  // }
-]
+const NOTES = [];
 
 function App() {
+  const [notes, setNotes] = useState(NOTES);
+  const [selectedNote, setSelectedNote] = useState({});
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const [notes, setNotes] = useState(NOTES)
-
-  
   const addNote = (note) => {
     setNotes((prevNotes) => {
-      return [...prevNotes, note]
-    })
-  }
+      return [...prevNotes, note];
+    });
+  };
 
   const deleteNote = (id) => {
     setNotes((prevNotes) => {
-      return prevNotes.filter((note) =>id !== note.id)
-    })
- }
+      return prevNotes.filter((note) => id !== note.id);
+    });
+  };
 
-//  function handleDeleteTask(taskId) {
-//   setTasks(tasks.filter((t) => t.id !== taskId));
-// }
+  const toggleModal = () => {
+    setIsModalOpen(prevState => {
+      return !prevState;
+    });
+  };
 
   return (
     <div>
-       <Navbar/>
-       <Sidebar/>
-       <Form addNote={addNote} />
-       <Notes notes={notes} deleteNote={deleteNote}/>
-       <Modal/>
+      <Navbar />
+      <Sidebar />
+      <Form addNote={addNote} />
+      <Notes
+        notes={notes}
+        deleteNote={deleteNote}
+        toggleModal={toggleModal}
+        setSelectedNote={setSelectedNote}
+      />
+      {isModalOpen && (
+        <Modal isModalOpen={isModalOpen} selectedNote={selectedNote} toggleModal={toggleModal}/>
+      )}
     </div>
   );
 }

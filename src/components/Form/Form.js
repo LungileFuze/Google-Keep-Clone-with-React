@@ -3,9 +3,11 @@ import "./Form.css";
 import { uid } from 'uid';
 
 const Form = (props) => {
-  const [title, setTitle] = useState("");
-  const [text, setText] = useState("");
-  const [isActiveForm, setIsActiveForm] = useState(false);
+  console.log(props)
+  const { edit, selectedNote, toggleModal } = props;
+  const [title, setTitle] = useState(edit && selectedNote.title || "");
+  const [text, setText] = useState(edit && selectedNote.text || "");
+  const [isActiveForm, setIsActiveForm] = useState(edit);
 
   const titleChangeHandler = (event) => setTitle(event.target.value);
   const textChangeHandler = (event) => {
@@ -15,16 +17,21 @@ const Form = (props) => {
 
   const submitFormHandler = (event) => {
     event.preventDefault();
-    const note = {
-      id: uid(),
-      title,
-      text,
-    };
-    console.log(note)
-    props.addNote(note);
+
+    if(!edit) {
+      const note = {
+        id: uid(),
+        title,
+        text,
+      };
+      props.addNote(note);
+    setIsActiveForm(false)
+
+    } else {
+      toggleModal()
+    }
     setTitle("");
     setText("");
-    setIsActiveForm(false)
   };
 
   const formClickHandler = () => {
@@ -34,7 +41,7 @@ const Form = (props) => {
   return (
     <div>
       <div className="form-container active-form" onClick={formClickHandler}>
-        <form onSubmit={submitFormHandler} className={isActiveForm ? "form" : ""} id="form">
+        <form onSubmit={submitFormHandler} className={isActiveForm ? "form" : ""}>
           {isActiveForm && (
             <input
               onChange={titleChangeHandler}
@@ -129,32 +136,4 @@ const Form = (props) => {
 };
 
 export default Form;
-
-
-  /* <div
-className="form-container inactive-form"
-onClick={formClickHandler}
->
-<form action="">
-  <input
-    className="note-text"
-    type="text"
-    placeholder="Take a note..."
-  />
-  <div className="form-actions">
-    <div className="tooltip">
-      <i className="material-icons-outlined hover">check_box</i>
-      <span className="tooltip-text">New list</span>
-    </div>
-    <div className="tooltip">
-      <i className="material-icons-outlined hover">brush</i>
-      <span className="tooltip-text">New note with drawing</span>
-    </div>
-    <div className="tooltip">
-      <i className="material-icons-outlined hover">image</i>
-      <span className="tooltip-text">New note with image</span>
-    </div>
-  </div>
-</form>
-</div> */
 

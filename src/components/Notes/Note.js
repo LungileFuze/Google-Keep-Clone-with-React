@@ -1,16 +1,20 @@
 import React, { useState } from "react";
 
 const Note = (props) => {
-  const [title, setTitle] = useState(props.title);
-  const [text, setText] = useState(props.text);
+  const {toggleModal, note, setSelectedNote} = props;
+
+  const [title, setTitle] = useState(note.title);
+  const [text, setText] = useState(note.text);
   const [isHover, setIsHover] = useState(false);
   
-  // const noteClickHandler = () => {
-  //   setTitle("changed Title");
-  //   setText("change Text");
-  // };
+  const noteClickHandler = () => {
+    toggleModal();
+    setSelectedNote(note)
+    // setTitle("changed Title");
+    // setText("change Text");
+  };
 
-  const archiveNoteHandler = () => props.deleteNote(props.id)
+  const archiveNoteHandler = () => props.deleteNote(note.id)
 
   const hoverOverHandler = () => {
     setIsHover(true)
@@ -26,7 +30,7 @@ const Note = (props) => {
     <div
       className="note"
       id={props.id}
-      // onClick={noteClickHandler}
+      onClick={noteClickHandler}
       onMouseOver={hoverOverHandler}
       onMouseOut={hoverOutHandler}
     >
