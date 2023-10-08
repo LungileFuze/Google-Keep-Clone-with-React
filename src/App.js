@@ -18,6 +18,20 @@ function App() {
     });
   };
 
+  const editNote = (editedNote) => {
+
+    setNotes((prevNotes) => {
+      const newArray = prevNotes.map((note) => {
+        if (editedNote.id === note.id) {
+          note.title = editedNote.title;
+          note.text = editedNote.text;
+        }
+        return note;
+      });
+      return newArray;
+    });
+  };
+
   const deleteNote = (id) => {
     setNotes((prevNotes) => {
       return prevNotes.filter((note) => id !== note.id);
@@ -25,7 +39,7 @@ function App() {
   };
 
   const toggleModal = () => {
-    setIsModalOpen(prevState => {
+    setIsModalOpen((prevState) => {
       return !prevState;
     });
   };
@@ -42,7 +56,12 @@ function App() {
         setSelectedNote={setSelectedNote}
       />
       {isModalOpen && (
-        <Modal isModalOpen={isModalOpen} selectedNote={selectedNote} toggleModal={toggleModal}/>
+        <Modal
+          isModalOpen={isModalOpen}
+          selectedNote={selectedNote}
+          toggleModal={toggleModal}
+          editNote={editNote}
+        />
       )}
     </div>
   );

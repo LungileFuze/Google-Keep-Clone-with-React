@@ -2,9 +2,6 @@ import React, { useState } from "react";
 
 const Note = (props) => {
   const {toggleModal, note, setSelectedNote} = props;
-
-  const [title, setTitle] = useState(note.title);
-  const [text, setText] = useState(note.text);
   const [isHover, setIsHover] = useState(false);
   
   const noteClickHandler = () => {
@@ -14,14 +11,14 @@ const Note = (props) => {
     // setText("change Text");
   };
 
-  const archiveNoteHandler = () => props.deleteNote(note.id)
-
   const hoverOverHandler = () => {
     setIsHover(true)
   };
   const hoverOutHandler = () => {
     setIsHover(false)
   };
+
+  const archiveNoteHandler = () => props.deleteNote(note.id)
 
   //Mouseover using inline style css
   // style={{ visibility: isHover? "visible" : "hidden"}}
@@ -38,8 +35,8 @@ const Note = (props) => {
         <span className="material-icons check-circle">check_circle</span>
       )}
 
-      <div className="title">{title}</div>
-      <div className="text">{text}</div>
+      <div className="title">{note.title}</div>
+      <div className="text">{note.text}</div>
 
       {isHover && (
         <div className="note-footer" 

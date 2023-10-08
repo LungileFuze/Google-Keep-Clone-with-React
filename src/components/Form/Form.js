@@ -3,10 +3,9 @@ import "./Form.css";
 import { uid } from 'uid';
 
 const Form = (props) => {
-  console.log(props)
   const { edit, selectedNote, toggleModal } = props;
-  const [title, setTitle] = useState(edit && selectedNote.title || "");
-  const [text, setText] = useState(edit && selectedNote.text || "");
+  const [title, setTitle] = useState((edit && selectedNote.title) || "");
+  const [text, setText] = useState((edit && selectedNote.text) || "");
   const [isActiveForm, setIsActiveForm] = useState(edit);
 
   const titleChangeHandler = (event) => setTitle(event.target.value);
@@ -19,15 +18,18 @@ const Form = (props) => {
     event.preventDefault();
 
     if(!edit) {
-      const note = {
+      props.addNote({
         id: uid(),
         title,
         text,
-      };
-      props.addNote(note);
+      });
     setIsActiveForm(false)
-
     } else {
+      props.editNote({
+        id: selectedNote.id,
+        title,
+        text
+      })
       toggleModal()
     }
     setTitle("");
